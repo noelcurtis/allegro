@@ -34,8 +34,10 @@ public class LineProcessor
             _wordPairers.add(wordPairer);
             line = _reader.getLine();
         }
+        System.out.println("Pairing: " + (System.currentTimeMillis() - start) + "ms");
         guardCompletion();
-        System.out.println("Took: " + (System.currentTimeMillis() - start) + "ms");
+        System.out.println("Compiling Results: " + (System.currentTimeMillis() - start) + "ms");
+        printOutput();
     }
 
     /**
@@ -46,7 +48,6 @@ public class LineProcessor
         while (!isComplete())
         {}
         complieResults();
-        printOutput();
     }
 
     /**
