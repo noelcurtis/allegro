@@ -67,4 +67,9 @@ public class WordPair
     {
         return new Gson().toJson(this);
     }
+
+    public String format()
+    {
+        return _first + "," + _second;
+    }
 }

@@ -14,6 +14,7 @@ public class Mediator
     private static int threadCount = Runtime.getRuntime().availableProcessors();
 
     public static HashMap<WordPair, Integer> WordPairsCount = new HashMap<WordPair, Integer>();
+    public static int RecurranceThreshold = 2;
 
     /**
      * Helper to get the Executor Service to submit jobs to

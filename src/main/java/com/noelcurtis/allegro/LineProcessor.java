@@ -1,6 +1,6 @@
 package com.noelcurtis.allegro;
 
-import com.google.gson.Gson;
+import java.util.Map;
 
 public class LineProcessor
 {
@@ -20,10 +20,19 @@ public class LineProcessor
             WordPairer wordPairer = new WordPairer(line);
             // kick it off
             Mediator.getExecutorService().execute(wordPairer);
-            //wordPairer.run();
             line = _reader.getLine();
         }
+        printOutput();
+    }
 
-        System.out.println(new Gson().toJson(Mediator.WordPairsCount));
+    public void printOutput()
+    {
+        for (Map.Entry<WordPair, Integer> entry : Mediator.WordPairsCount.entrySet())
+        {
+            if (entry.getValue() >= Mediator.RecurranceThreshold)
+            {
+                System.out.println(entry.getKey().format() + "\n");
+            }
+        }
     }
 }
