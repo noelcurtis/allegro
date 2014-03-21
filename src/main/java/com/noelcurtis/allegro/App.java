@@ -1,13 +1,21 @@
 package com.noelcurtis.allegro;
 
-/**
- * Hello world!
- *
- */
-public class App 
+
+import java.io.File;
+
+public class App
 {
     public static void main(String[] args)
     {
-        System.out.println( "Hello World!" );
+        try
+        {
+            String filePath = new File(".").getCanonicalPath() + "/src/test/java/com/noelcurtis/allegro/Artist_lists_small.txt";
+            LineProcessor lp = new LineProcessor(filePath);
+            lp.startProcessing();
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.toString());
+        }
     }
 }

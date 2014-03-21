@@ -37,7 +37,7 @@ public class Reader implements Runnable
     }
 
     /**
-     * Reads lines from a file into a Queue, and optionally add them to an EventBus
+     * Reads lines from a file into a Queue,
      * This is done on a single thread, multiple threads are not used to read from disk!
      * @throws Exception
      */

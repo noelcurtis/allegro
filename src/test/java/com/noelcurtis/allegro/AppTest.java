@@ -63,7 +63,7 @@ public class AppTest
     @Test
     public void processFile() throws Exception
     {
-        String filePath = new File(".").getCanonicalPath() + "/src/test/java/com/noelcurtis/allegro/testfile.txt";
+        String filePath = new File(".").getCanonicalPath() + "/src/test/java/com/noelcurtis/allegro/Artist_lists_small.txt";
         LineProcessor lp = new LineProcessor(filePath);
         lp.startProcessing();
     }
