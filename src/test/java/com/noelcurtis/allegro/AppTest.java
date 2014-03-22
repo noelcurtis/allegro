@@ -67,4 +67,13 @@ public class AppTest
         LineProcessor lp = new LineProcessor(filePath);
         lp.startProcessing();
     }
+
+    @Test
+    public void kProcessFile() throws Exception
+    {
+        String filePath = new File(".").getCanonicalPath() + "/src/test/java/com/noelcurtis/allegro/Artist_lists_small.txt";
+        KReader kReader = new KReader(filePath);
+        kReader.processFile();
+        kReader.printOutput();
+    }
 }
