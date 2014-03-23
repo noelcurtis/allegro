@@ -30,8 +30,10 @@ public class LineProcessor
             // Create a word Pairer and kick it off
             final WordPairer wordPairer = new WordPairer(line);
             Mediator.getExecutorService().execute(wordPairer);
+
             //wordPairer.run();
             _wordPairers.add(wordPairer);
+
             line = _reader.getLine();
         }
         System.out.println("Pairing: " + (System.currentTimeMillis() - start) + "ms");

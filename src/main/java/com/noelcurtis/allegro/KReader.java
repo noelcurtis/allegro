@@ -34,30 +34,29 @@ public class KReader
             throw new Exception("File not found at path:" + _filePath);
         }
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
-        // Read lines into a queue with a buffered reader
+        // Read lines and process then one at a time
         for (String line; (line = br.readLine()) != null; )
         {
             processLine(line);
         }
         br.close();
-        System.out.println("Took: " + (System.currentTimeMillis() - currentTime));
+        System.out.println("Time Taken: " + (System.currentTimeMillis() - currentTime) + "ms");
     }
 
     private void processLine(String line)
     {
-        //System.out.println("Processing line: " + line);
         WordPairer pairer = new WordPairer(line);
         pairer.run();
         Set<WordPair> wordPairs = pairer.getWordPairs();
         for (WordPair p : wordPairs)
         {
-            //if (!_pairsCount.containsKey(p))
+            if (!_pairsCount.containsKey(p))
             {
-                //_pairsCount.put(p, 1);
+                _pairsCount.put(p, 1);
             }
-            //else
+            else
             {
-                //_pairsCount.put(p, _pairsCount.get(p) + 1);
+                _pairsCount.put(p, _pairsCount.get(p) + 1);
             }
         }
     }

@@ -1,13 +1,9 @@
 package com.noelcurtis.allegro;
 
-import com.google.common.base.Charsets;
-import com.google.common.hash.HashFunction;
-import com.google.common.hash.Hashing;
 import com.google.gson.Gson;
 
 /**
  * A WordPair class that holds 2 words.
- * The once initialized its immutable.
  */
 public class WordPair
 {
@@ -49,17 +45,13 @@ public class WordPair
         else return false;
     }
 
+    /**
+     * Use to generate hash code for the word pair.
+     * @return
+     */
     @Override
     public int hashCode() {
-        HashFunction hf = Hashing.md5();
-        int h1 = hf.newHasher()
-                .putString(_first, Charsets.UTF_8)
-                .hash().asInt();
-        int h2 = hf.newHasher()
-                .putString(_second, Charsets.UTF_8)
-                .hash().asInt();
-        int hashCode = h1 + h2;
-        return hashCode;
+        return _first.hashCode() + _second.hashCode();
     }
 
     @Override

@@ -56,7 +56,6 @@ public class AppTest
         final ConcurrentHashMap<WordPair, Integer> _wordPairsCount = new ConcurrentHashMap<WordPair, Integer>();
         WordPairer p = new WordPairer(testString);
         p.run();
-
         assert (_wordPairsCount.size() == 10);
     }
 
