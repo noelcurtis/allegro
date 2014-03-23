@@ -71,4 +71,25 @@ public class AppTest
         }
         kReader.printOutput();
     }
+
+    @Test
+    public void kMain() throws Exception
+    {
+        String filePath = new File(".").getCanonicalPath() + "/src/test/java/com/noelcurtis/allegro/Artist_lists_small.txt";
+        String[] input = new String[]{filePath};
+        App.main(input);
+    }
+
+    @Test
+    public void kMainDefault() throws Exception
+    {
+        String[] input = new String[]{};
+        App.main(input);
+    }
+
+    @Test
+    public void kMainNone() throws Exception
+    {
+        App.main(null);
+    }
 }

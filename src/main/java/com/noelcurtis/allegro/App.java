@@ -13,11 +13,15 @@ public class App
             {
                 filePath = args[0];
             }
-            // initialize a reader
-            KReader kReader = new KReader(filePath);
-            // process file
+            // Initialize the reader
+            ConcurrentKReader kReader = new ConcurrentKReader(filePath);
+            // Process the files
             kReader.processFile();
-            // print output
+            while (!kReader.isComplete())
+            {
+                // Wait till all the threads complete
+            }
+            // print the output
             kReader.printOutput();
         }
         catch (Exception ex)
