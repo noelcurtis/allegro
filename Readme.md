@@ -29,3 +29,7 @@
 ## Serialized Version
 *   There is also a serialized version of the counter `KReader`, you can see how this compares by running the test cases.
 
+## Notes
+*   I did look into HyperLogLog(http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf) as another algorithm to solve the problem, but as there is no memory constraint the current solution works well.
+*   Also implementing it seemed out of the scope of this exercise and would have taken me the whole weekend or more.
+
