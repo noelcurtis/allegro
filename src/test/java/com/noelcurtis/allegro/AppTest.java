@@ -81,20 +81,6 @@ public class AppTest
     {
         URL url = App.class.getClassLoader().getResource("Artist_lists_small.txt");
         String filePath = url.getPath();
-        String[] input = new String[]{filePath};
-        App.main(input);
-    }
-
-    @Test
-    public void kMainDefault() throws Exception
-    {
-        String[] input = new String[]{};
-        App.main(input);
-    }
-
-    @Test
-    public void kMainNone() throws Exception
-    {
-        App.main(null);
+        App.work(filePath);
     }
 }
