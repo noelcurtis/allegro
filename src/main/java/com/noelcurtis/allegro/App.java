@@ -1,6 +1,5 @@
 package com.noelcurtis.allegro;
 
-
 import java.io.File;
 
 public class App
@@ -10,12 +9,20 @@ public class App
         try
         {
             String filePath = new File(".").getCanonicalPath() + "/src/test/java/com/noelcurtis/allegro/Artist_lists_small.txt";
-            LineProcessor lp = new LineProcessor(filePath);
-            lp.startProcessing();
+            if (args != null && args.length != 0)
+            {
+                filePath = args[0];
+            }
+            // initialize a reader
+            KReader kReader = new KReader(filePath);
+            // process file
+            kReader.processFile();
+            // print output
+            kReader.printOutput();
         }
         catch (Exception ex)
         {
-            System.out.println(ex.toString());
+            System.out.println("Error: " + ex.toString());
         }
     }
 }

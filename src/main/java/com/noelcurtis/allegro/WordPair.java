@@ -31,6 +31,11 @@ public class WordPair
         return _second;
     }
 
+    /**
+     * Used to check for equality between 2 word pairs
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj)
     {
@@ -60,6 +65,10 @@ public class WordPair
         return new Gson().toJson(this);
     }
 
+    /**
+     * Use to format words for output
+     * @return
+     */
     public String format()
     {
         return _first + "," + _second;

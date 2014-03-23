@@ -8,7 +8,8 @@ import java.util.Set;
 public class WordPairer implements Runnable
 {
     private final String _operator;
-    //using a Set here with the assumption that there is a constraint on not having a pair occur twice on a line.
+    //using a Set here with the assumption that there is a
+    // constraint on not having a pair occur twice on a line.
     private final Set<WordPair> _wordPairs;
     private boolean _isComplete;
 

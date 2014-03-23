@@ -68,7 +68,7 @@ public class KReader
     {
         for (Map.Entry<WordPair, Integer> entry : _pairsCount.entrySet())
         {
-            if (entry.getValue() >= Mediator.RecurranceThreshold)
+            if (entry.getValue() >= Mediator.RecurrenceThreshold)
             {
                 System.out.println(entry.getKey().format() + "-> " + entry.getValue());
             }

@@ -5,13 +5,12 @@ import java.util.concurrent.Executors;
 
 public class Mediator
 {
-    // This is an ExecutorService used to mediate on a
-    // thread pool and execute tasks from a Queue of lines to process
+    // ExecutorService used to mediate on a thread pool
     private static ExecutorService executorService;
     // This is the number to threads that will be made available in the pool
-    // The threads will be used to execute WordPairer on lines
-    private static int threadCount = 20;
-    public static int RecurranceThreshold = 50;
+    private static int ThreadCount = 20;
+    // Threshold for the number of times words pairs occur
+    public static int RecurrenceThreshold = 50;
 
     /**
      * Helper to get the Executor Service to submit jobs to
@@ -21,7 +20,7 @@ public class Mediator
     {
         if (executorService == null)
         {
-            executorService = Executors.newFixedThreadPool(threadCount);
+            executorService = Executors.newFixedThreadPool(ThreadCount);
         }
         return executorService;
     }
