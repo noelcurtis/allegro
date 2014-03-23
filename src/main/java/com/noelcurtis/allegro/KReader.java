@@ -18,11 +18,6 @@ public class KReader
         _filePath = filePath;
     }
 
-    public HashMap<WordPair, Integer> getCount()
-    {
-        return _pairsCount;
-    }
-
     public void processFile() throws Exception
     {
         long currentTime = System.currentTimeMillis();

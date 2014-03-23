@@ -1,5 +1,6 @@
 package com.noelcurtis.allegro;
 
+import com.google.common.base.Strings;
 import com.google.gson.Gson;
 
 import java.util.HashSet;
@@ -11,22 +12,11 @@ public class WordPairer implements Runnable
     //using a Set here with the assumption that there is a
     // constraint on not having a pair occur twice on a line.
     private final Set<WordPair> _wordPairs;
-    private boolean _isComplete;
 
     public WordPairer(String operator)
     {
-        _operator = operator;
+        _operator = Strings.nullToEmpty(operator);
         _wordPairs = new HashSet<WordPair>();
-        _isComplete = false;
-    }
-
-    /**
-     * Check if WordPairing is complete
-     * @return
-     */
-    public boolean isComplete()
-    {
-        return _isComplete;
     }
 
     /**
@@ -56,7 +46,6 @@ public class WordPairer implements Runnable
             }
         }
         //System.out.println("Finished line" + _operator);
-        _isComplete = true;
     }
 
     @Override

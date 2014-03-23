@@ -58,4 +58,17 @@ public class AppTest
         kReader.processFile();
         kReader.printOutput();
     }
+
+    @Test
+    public void kConcurrentProcessFile() throws Exception
+    {
+        String filePath = new File(".").getCanonicalPath() + "/src/test/java/com/noelcurtis/allegro/Artist_lists_small.txt";
+        ConcurrentKReader kReader = new ConcurrentKReader(filePath);
+        kReader.processFile();
+        while (!kReader.isComplete())
+        {
+            // Wait till all the threads complete
+        }
+        kReader.printOutput();
+    }
 }
