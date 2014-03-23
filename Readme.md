@@ -1,3 +1,2 @@
-## Process
-*   Read the file line by lines
-*   Put
+## Usage
+You can run the program using `java -jar Allegro-1.0.jar`

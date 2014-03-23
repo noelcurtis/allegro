@@ -61,13 +61,21 @@ public class ConcurrentKReader
     /**
      * Use to print the output
      */
-    public void printOutput()
+    public void printOutput(boolean debug)
     {
+        System.out.println("\nOutput:");
         for (Map.Entry<WordPair, Integer> entry : _pairsCount.entrySet())
         {
             if (entry.getValue() >= Mediator.RecurrenceThreshold)
             {
-                System.out.println(entry.getKey().format() + "-> " + entry.getValue());
+                if (debug)
+                {
+                    System.out.println(entry.getKey().format() + "-> " + entry.getValue());
+                }
+                else
+                {
+                    System.out.println(entry.getKey().format());
+                }
             }
         }
     }

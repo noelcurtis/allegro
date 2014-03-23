@@ -1,6 +1,6 @@
 package com.noelcurtis.allegro;
 
-import java.io.File;
+import java.net.URL;
 
 public class App
 {
@@ -8,7 +8,9 @@ public class App
     {
         try
         {
-            String filePath = new File(".").getCanonicalPath() + "/src/test/java/com/noelcurtis/allegro/Artist_lists_small.txt";
+            System.out.println("Starting..");
+            URL url = App.class.getClassLoader().getResource("Artist_lists_small.txt");
+            String filePath = url.getPath();
             if (args != null && args.length != 0)
             {
                 filePath = args[0];
@@ -22,7 +24,7 @@ public class App
                 // Wait till all the threads complete
             }
             // print the output
-            kReader.printOutput();
+            kReader.printOutput(false);
         }
         catch (Exception ex)
         {

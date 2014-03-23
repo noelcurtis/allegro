@@ -1,7 +1,7 @@
 package com.noelcurtis.allegro;
 
 import org.junit.Test;
-import java.io.File;
+import java.net.URL;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -53,29 +53,34 @@ public class AppTest
     @Test
     public void kProcessFile() throws Exception
     {
-        String filePath = new File(".").getCanonicalPath() + "/src/test/java/com/noelcurtis/allegro/Artist_lists_small.txt";
+        System.out.println("Running in serial");
+        URL url = App.class.getClassLoader().getResource("Artist_lists_small.txt");
+        String filePath = url.getPath();
         KReader kReader = new KReader(filePath);
         kReader.processFile();
-        kReader.printOutput();
+        kReader.printOutput(true);
     }
 
     @Test
     public void kConcurrentProcessFile() throws Exception
     {
-        String filePath = new File(".").getCanonicalPath() + "/src/test/java/com/noelcurtis/allegro/Artist_lists_small.txt";
+        System.out.println("Running concurrently");
+        URL url = App.class.getClassLoader().getResource("Artist_lists_small.txt");
+        String filePath = url.getPath();
         ConcurrentKReader kReader = new ConcurrentKReader(filePath);
         kReader.processFile();
         while (!kReader.isComplete())
         {
             // Wait till all the threads complete
         }
-        kReader.printOutput();
+        kReader.printOutput(true);
     }
 
     @Test
     public void kMain() throws Exception
     {
-        String filePath = new File(".").getCanonicalPath() + "/src/test/java/com/noelcurtis/allegro/Artist_lists_small.txt";
+        URL url = App.class.getClassLoader().getResource("Artist_lists_small.txt");
+        String filePath = url.getPath();
         String[] input = new String[]{filePath};
         App.main(input);
     }
