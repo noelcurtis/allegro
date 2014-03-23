@@ -53,7 +53,7 @@ public class AppTest
     @Test
     public void kProcessFile() throws Exception
     {
-        System.out.println("Running in serial");
+        System.out.println("\n\nRunning in serial");
         URL url = App.class.getClassLoader().getResource("Artist_lists_small.txt");
         String filePath = url.getPath();
         KReader kReader = new KReader(filePath);
@@ -64,7 +64,7 @@ public class AppTest
     @Test
     public void kConcurrentProcessFile() throws Exception
     {
-        System.out.println("Running concurrently");
+        System.out.println("\n\nRunning concurrently");
         URL url = App.class.getClassLoader().getResource("Artist_lists_small.txt");
         String filePath = url.getPath();
         ConcurrentKReader kReader = new ConcurrentKReader(filePath);
