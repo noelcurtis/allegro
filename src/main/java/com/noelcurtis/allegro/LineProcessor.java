@@ -19,6 +19,9 @@ public class LineProcessor implements Runnable
         _isComplete = false;
     }
 
+    /**
+     * Counts word pairs for a list of lines
+     */
     private void processLines()
     {
         for (String l : _lines)
@@ -41,6 +44,9 @@ public class LineProcessor implements Runnable
         }
     }
 
+    /**
+     * Aggregate local counts with global counts
+     */
     private void compileResults()
     {
         synchronized (_pairsCount){
@@ -66,6 +72,10 @@ public class LineProcessor implements Runnable
         _isComplete = true;
     }
 
+    /**
+     * Use to check if the lines processor is done
+     * @return
+     */
     public boolean isComplete()
     {
         return _isComplete;

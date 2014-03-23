@@ -4,5 +4,3 @@
 
 ## Build
 *   The project is built with Maven using `mvn clean install`
-
-## Info

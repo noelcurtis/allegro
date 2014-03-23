@@ -20,9 +20,13 @@ public class ConcurrentKReader
         _filePath = filePath;
     }
 
+    /**
+     * Use to process the file for cardinality calculation
+     * @throws Exception
+     */
     public void processFile() throws Exception
     {
-        _lineProcessors = new LinkedList<LineProcessor>();
+        _lineProcessors = new LinkedList<LineProcessor>(); // using a linked list for mostly writes
         long currentTime = System.currentTimeMillis();
         _pairsCount = new HashMap<WordPair, Integer>();
         // Get the file URL
@@ -31,31 +35,50 @@ public class ConcurrentKReader
         {
             throw new Exception("File not found at path:" + _filePath);
         }
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
-        // Read lines and process then one at a time
-        int count = 0;
-        String[] lines = new String[Mediator.SplittingFactor];
-        for (String line; (line = br.readLine()) != null; )
+        // create a reader to read the file
+        BufferedReader br  = null;
+        try
         {
-            if (count == Mediator.SplittingFactor)
+            // Read lines and process and process them by the SplittingFactor
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
+            int count = 0;
+            String[] lines = new String[Mediator.SplittingFactor];
+            for (String line; (line = br.readLine()) != null; )
+            {
+                // Once the SplittingFactor is reached, kick of a job to count word pairs
+                if (count == Mediator.SplittingFactor)
+                {
+                    LineProcessor lineProcessor = new LineProcessor(lines, _pairsCount);
+                    // start off and async line processor
+                    Mediator.getExecutorService().submit(lineProcessor);
+                    _lineProcessors.add(lineProcessor);
+                    count = 0; // reset the count
+                    lines = new String[Mediator.SplittingFactor]; // initialize the array
+                }
+                lines[count] = line;
+                count++;
+            }
+            // check if there are some lines still remaining
+            if (lines.length > 0)
             {
                 LineProcessor lineProcessor = new LineProcessor(lines, _pairsCount);
+                // start off and async line processor
                 Mediator.getExecutorService().submit(lineProcessor);
-                _lineProcessors.add(lineProcessor);
-                count = 0; // reset the count
-                lines = new String[Mediator.SplittingFactor]; // initialize the array
             }
-            lines[count] = line;
-            count++;
+            br.close(); // close the buffer
+            System.out.println("Time Taken: " + (System.currentTimeMillis() - currentTime) + "ms");
         }
-        // check if there are some lines still remaining
-        if (lines.length > 0)
+        catch (Exception ex)
         {
-            LineProcessor lineProcessor = new LineProcessor(lines, _pairsCount);
-            Mediator.getExecutorService().submit(lineProcessor);
+            throw ex;
         }
-        br.close();
-        System.out.println("Time Taken: " + (System.currentTimeMillis() - currentTime) + "ms");
+        finally
+        {
+            if (br != null)
+            {
+                br.close(); // release the file handle on exception
+            }
+        }
     }
 
     /**
@@ -80,6 +103,10 @@ public class ConcurrentKReader
         }
     }
 
+    /**
+     * Use to check if all the line processors have completed
+     * @return
+     */
     public boolean isComplete()
     {
         boolean isComplete = true;
