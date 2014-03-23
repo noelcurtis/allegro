@@ -31,5 +31,5 @@
 
 ## Notes
 *   I did look into HyperLogLog(http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf) as another algorithm to solve the problem, but as there is no memory constraint the current solution works well.
-*   Also implementing it seemed out of the scope of this exercise and would have taken me the whole weekend or more.
+*   Also implementing it would have taken me more than 4 hours.
 
